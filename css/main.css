@@ -1,0 +1,42 @@
+body {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	height: 100%;
+	margin: 0;
+	text-align: center;
+	width: 100%;
+}
+
+h1 {
+	font-size: 38px;
+  color:rgb(46,105,163);
+}
+
+h2 {
+	font-size: 56px;
+}
+
+
+.hero {
+  background-image: url('../../photo/pic.jpg');
+	background-size:cover;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	padding: 250px 0;
+	margin: 30px;
+  color:#ffffff
+}
+
+
+p {
+	font-size: 2rem;
+}
+
+.hero a {
+	color: #00FFAA;
+	font-size: 1.25em;
+	text-decoration: none;
+}
+
+footer{
+  color:darkgray;
+  font-size:1.5rem;
+}
