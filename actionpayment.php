@@ -12,7 +12,7 @@ if($tick == '1')
 {
   $query = "UPDATE finance SET ispay='done' WHERE name='$name'";
   if($con->query($query)===TRUE)
-    {echo 'Location:member_page';}
+    header('Location:member_page.php');
   else
     { echo "Error: " . $query . "<br>" . $con->error;}
 

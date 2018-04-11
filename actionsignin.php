@@ -18,7 +18,7 @@ if ($name == '' || $pass == '' || $phone=='' || $email=='' || $pass!==$cpass)
 else
 {
     $con=new mysqli($servername,$username,$password,$dbname);
-    $query = "SELECT * FROM member_basic WHERE name = '$name' ";
+    $query = "SELECT * FROM users WHERE name = '$name' ";
     $result=$con->query($query) OR die('Error sql');
 
     if($result -> num_rows > 0)
@@ -29,8 +29,8 @@ else
     else
       {
 
-        $query1 = "INSERT INTO member_basic (name, born, phone, room, email,password)
-        VALUES('$name','$born','$phone','$room','$email','$pass')";
+        $query1 = "INSERT INTO users (name, password , email)
+        VALUES('$name','$pass','$email')";
 
         $query2 = "INSERT INTO finance (name)
         VALUES('$name')";

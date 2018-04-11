@@ -1,14 +1,18 @@
 <?php
-require('config.php');
+ob_start();
+session_start();
 
+require('config.php');
 $name = $_POST['name'];
 $pass = $_POST['password'];
 $refer = $_POST['refer'];
 
-if ($name == '' || $pass == '')
+
+if(isset($_SESSION['login']))
 {
-  // No login information
-  header('Location: login.php?refer='. urlencode($_POST['refer']));
+
+  header('Location:login.php');
+    //echo 'You are already signed in, you can <a href="logout.php">logout</a> if you want.';
 }
 
 else
@@ -22,16 +26,21 @@ else
   else
   {
   $con = new mysqli($servername, $username, $password, $dbname);
-  $query = "SELECT name FROM member_basic WHERE name = '$name' AND password ='$pass'";
+  $query = "SELECT * FROM users WHERE name = '$name' AND password ='$pass'";
   $result=$con->query($query) OR die('Error sql');
   if($result -> num_rows > 0)
     {
+      $_SESSION['login']=true;
+      $row = $result->fetch_assoc();
+      $_SESSION['name']  = $row['name'];
+      $_SESSION['user_id'] = $row['id'];
       header('Location:member_page.php');
-    }
+}
+
   else
     {
         // Not authenticated
-        echo "no result";
+      header('Location:login.php');
     }
   }
 }

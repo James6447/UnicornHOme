@@ -1,7 +1,6 @@
 <?php
 require("config.php");
 
-
 $conn=new mysqli($servername,$username,$password,$dbname);
 $s=$_GET['s'];
 $c=$_GET['c'];
@@ -22,19 +21,23 @@ else if($s=='1')
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/finance.css"/>
 <title>Finance Table</title>
-
+<link rel="stylesheet" href="css/member.css">
 </head>
 
 <body>
-<div class="show" align="center">
-<table border="1" width="700px">
+
+<section>
+  <h1>FINANCE INFOM</h1>
+
+<div class="tbl-header">
+<table cellpadding="0" cellspacing="0" border="0">
+  <thead>
    <tr>
-    <th >姓名</th>
-    <th >房租</th>
-    <th >水電</th>
-    <th >
+    <td >姓名</td>
+    <td >房租</td>
+    <td >水電</td>
+    <td >
      <?php
       if($s!=1 and $c == 'totalpayment'){
         echo '<a href="financetable.php?c=totalpayment&amp;s=1">Total</a><span class="tri_up"></span>';
@@ -44,20 +47,26 @@ else if($s=='1')
         echo '<a href="financetable.php?c=totalpayment&amp;s=1">Total</a>';
       }
       ?>
-    </th>
-    <th >
+    </td>
+    <td >
       <?php
       if($s!=1 and $c == 'ispay'){
-        echo '<a href="financetable.php?c=ispay&amp;s=1">Ispay</a><span class="tri_up"></span>';
+        echo '<a  href="financetable.php?c=ispay&amp;s=1">Ispay</a><span class="tri_up"></span>';
       }else if($s!=2 and $c == 'ispay'){
         echo '<a href="financetable.php?c=ispay&amp;s=2">Ispay</a><span class="tri_down"></span>';
       }else{
         echo '<a href="financetable.php?c=ispay&amp;s=1">Ispay</a>';
       }
       ?>
-    </th>
+    </td>
 
   </tr>
+</thead>
+</table>
+</div>
+<div class="tbl-content">
+  <table cellpadding="0" cellspacing="0" border="0">
+    <thead>
   <?php
   $rs = $conn->query($data);
   if ($rs->num_rows > 0)
@@ -72,14 +81,28 @@ else if($s=='1')
                <td><?php echo $row["totalpayment"]?></td>
                <td><?php echo $row["ispay"]?></td>
              </tr>
+
   <?php       }
 }
   else {
       echo "No Result";
   }
 ?>
-</table>
+    </thead>
+  </table>
 </div>
-<p>&nbsp;</p>
+</section>
+
 </body>
+
+<footer>
+<div class="made-with-love">
+<a href='HomePage.php'><img src='../photo/logo.png' width="30" height="30" ></a>
+  Made with
+  <i>♥</i> by
+  <a target="_blank" href="https://www.facebook.com/liewyeejames">JamesLiew</a>
+  <p>CopyRight:&copy; 2018 UNICORN COMPANY All Right Reserved.</p>
+</div>
+</footer>
+
 </html>
