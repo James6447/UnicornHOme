@@ -14,13 +14,25 @@ mysqli_set_charset($con,'utf8');
   <td>Category</td>
   <td>Last Topic</td>
 </tr>
-  <?php
-  $query = "SELECT categories.cat_name,categories.cat_description,categories.cat_date,topics.topic_id,topics.topic_cat,categories.cat_id
+<?php
+$count = 0;
+$sql = "SELECT * FROM categories;";
+$result1 = $con->query($sql);
+while($row1 = $result1->fetch_assoc()){
+  $count = $count+1;
+
+}
+
+for ($i=0; $i <= $count; $i++) {
+
+  $query = "SELECT categories.cat_name,categories.cat_description,categories.cat_date,topics.topic_id,topics.topic_cat,categories.cat_id,topics.topic_subject
             From topics
             INNER JOIN categories
             ON categories.cat_id=topics.topic_cat
             WHERE cat_id = $i
-            ORDER BY topic_id DESC";
+            ORDER BY topic_id DESC
+            LIMIT 1
+            ";
 
   $result = $con->query($query);
   //show comment board
@@ -28,17 +40,13 @@ mysqli_set_charset($con,'utf8');
       {
 
           while($row = $result->fetch_assoc())
-           {
-             do {?>
+           {?>
                <tr>
                  <td><h3><a href="category_info.php?id=<?php echo $row["cat_id"] ?>"><?php echo $row["cat_name"]?></a></h3>
                    <?php echo $row["cat_description"]?><br/>
                    <small><?php echo $row["cat_date"] ?></small>
                   </td>
-              <?php
-            } while ( $row['cat_id'] != $row['cat_id'-1]);
-             {?>
-               <td><a href="topic.php?id=<?php echo $row["cat_id"].'">'.echo $row['']   </a></td>
+                <td><a></a><?php echo $row["topic_subject"]?></td>
              </tr>
 
   <?php
